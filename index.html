@@ -581,23 +581,32 @@
       <div class="section-label">Get in Touch</div>
       <h2 class="section-heading">Let's develop solutions together.</h2>
       <p class="section-body" style="margin-bottom: 32px;">Whether you're navigating a system transition, planning a needs assessment, or building your team's capacity — we'd love to hear about the work you're doing.</p>
-      <div class="contact-form">
-        <input type="text" placeholder="Name">
-        <input type="email" placeholder="Email">
-        <input type="text" placeholder="Organization">
-        <select>
-          <option value="" disabled selected>Area of interest</option>
-          <option>Practice & Policy Consulting</option>
-          <option>Change Management</option>
-          <option>Child Welfare & Family Services</option>
-          <option>Strategic Planning</option>
-          <option>Continuous Improvement</option>
-          <option>Leadership & Capacity Building</option>
-          <option>Other</option>
-        </select>
-        <textarea placeholder="Tell us about your challenge..."></textarea>
-        <button type="submit">Send Message</button>
-      </div>
+      <form id="contact-form" class="contact-form">
+
+  <input type="text" name="name" placeholder="Name" required>
+
+  <input type="email" name="email" placeholder="Email" required>
+
+  <input type="text" name="organization" placeholder="Organization">
+
+  <select name="interest" required>
+    <option value="" disabled selected>Area of interest</option>
+    <option>Practice & Policy Consulting</option>
+    <option>Change Management</option>
+    <option>Child Welfare & Family Services</option>
+    <option>Strategic Planning</option>
+    <option>Continuous Improvement</option>
+    <option>Leadership & Capacity Building</option>
+    <option>Other</option>
+  </select>
+
+  <textarea name="message" placeholder="Tell us about your challenge..." required></textarea>
+
+  <input type="hidden" name="source" value="website">
+
+  <button type="submit">Send Message</button>
+
+</form>
     </div>
     <div class="contact-info" style="margin-top: 56px;">
       <h3>Email</h3>
@@ -650,6 +659,25 @@
   document.querySelectorAll('.approach-steps > div').forEach((s, i) => {
     s.querySelector('.step-number').style.transitionDelay = `${i * 0.15}s`;
   });
+  document.getElementById("contact-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const form = this;
+  const formData = new FormData(form);
+
+  try {
+    await fetch("https://hooks.zapier.com/hooks/catch/1351440/undof5o/", {
+      method: "POST",
+      body: formData
+    });
+
+    alert("Thanks! Your message has been sent.");
+    form.reset();
+
+  } catch (error) {
+    alert("Something went wrong. Please try again.");
+  }
+});
 </script>
 
 </body>
