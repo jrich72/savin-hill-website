@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savin Hill Consulting — Health &amp; Human Services Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3B;
+    --red: #D72638;
+    --gray: #A0AEC0;
+    --light: #F7F9FB;
+    --white: #FFFFFF;
+    --text: #4a5568;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--navy);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 48px;
+    transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(11,31,59,0.97);
+    padding: 16px 48px;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.15);
+  }
+  .nav-logo {
+    font-weight: 600; font-size: 14px; letter-spacing: 4px;
+    color: var(--white); text-transform: uppercase; text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    text-align: center;
+    padding: 120px 48px 80px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(215,38,56,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 30%, rgba(160,174,192,0.04) 0%, transparent 40%);
+    animation: drift 20s ease-in-out infinite alternate;
+  }
+  @keyframes drift {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-3%, 2%) rotate(1deg); }
+  }
+  .hero-logo {
+    position: relative; z-index: 2;
+    animation: fadeUp 1.2s ease-out;
+  }
+  .hero-logo .mark {
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 600; letter-spacing: 0.35em;
+    color: var(--white); text-transform: uppercase; line-height: 1;
+  }
+  .hero-logo .rule {
+    width: 85%; height: 3px; margin: 16px auto 24px;
+    background: var(--red);
+  }
+  .hero-logo .sub {
+    font-size: clamp(12px, 2vw, 18px);
+    font-weight: 500; letter-spacing: 0.5em;
+    color: var(--white); text-transform: uppercase;
+  }
+  .hero-tagline {
+    position: relative; z-index: 2; margin-top: 40px;
+    font-size: clamp(16px, 2.2vw, 22px); font-weight: 300;
+    color: var(--gray); letter-spacing: 0.03em; line-height: 1.6;
+    max-width: 700px;
+    animation: fadeUp 1.2s ease-out 0.3s both;
+  }
+  .hero-sub {
+    position: relative; z-index: 2; margin-top: 16px;
+    font-size: clamp(12px, 1.4vw, 15px); font-weight: 400;
+    color: rgba(160,174,192,0.7); max-width: 580px; line-height: 1.7;
+    animation: fadeUp 1.2s ease-out 0.45s both;
+  }
+  .hero-cta {
+    position: relative; z-index: 2; margin-top: 40px;
+    display: inline-block; padding: 14px 40px;
+    border: 1.5px solid var(--red); color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    text-decoration: none; transition: background 0.3s;
+    animation: fadeUp 1.2s ease-out 0.6s both;
+  }
+  .hero-cta:hover { background: var(--red); }
+  .scroll-indicator {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    z-index: 2; width: 1px; height: 48px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section { padding: 120px 48px; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--red); margin-bottom: 24px;
+  }
+  .section-heading {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 600; line-height: 1.2;
+    color: var(--navy); margin-bottom: 24px; max-width: 700px;
+  }
+  .section-body {
+    font-size: 16px; font-weight: 400; line-height: 1.8;
+    color: var(--text); max-width: 640px;
+  }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  /* MISSION / WHO WE ARE */
+  .mission { background: var(--light); }
+  .mission-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .mission-pillars {
+    display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 40px;
+  }
+  .pillar {
+    display: flex; gap: 20px; align-items: flex-start;
+  }
+  .pillar-marker {
+    width: 3px; min-height: 100%; background: var(--red); flex-shrink: 0;
+    border-radius: 2px;
+  }
+  .pillar h4 {
+    font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px;
+  }
+  .pillar p {
+    font-size: 13px; line-height: 1.7; color: var(--text);
+  }
+
+  /* EXPERTISE */
+  .expertise { background: var(--white); }
+  .expertise-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px; margin-top: 64px;
+  }
+  .expertise-card {
+    padding: 40px 32px; border: 1px solid #e2e6ea;
+    border-top: 3px solid var(--navy);
+    transition: border-top-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  .expertise-card:hover {
+    border-top-color: var(--red); transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(11,31,59,0.08);
+  }
+  .expertise-card h3 { font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 16px; }
+  .expertise-card p { font-size: 14px; line-height: 1.7; color: var(--text); }
+  .card-accent { width: 24px; height: 2px; background: var(--red); margin-bottom: 20px; }
+
+  /* IMPACT */
+  .impact { background: var(--navy); color: var(--white); }
+  .impact .section-label { color: var(--red); }
+  .impact .section-heading { color: var(--white); }
+  .impact .section-body { color: var(--gray); }
+  .impact-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 40px; margin-top: 64px;
+  }
+  .impact-item {
+    padding: 36px; border: 1px solid rgba(160,174,192,0.15);
+    border-left: 3px solid var(--red);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .impact-item:hover { background: rgba(255,255,255,0.03); border-left-color: var(--white); }
+  .impact-item h3 { font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+  .impact-item p { font-size: 13px; line-height: 1.7; color: var(--gray); }
+
+  /* ANDREA / FOUNDER */
+  .founder { background: var(--light); }
+  .founder-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+  }
+  .founder-credentials {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px;
+  }
+  .credential-tag {
+    padding: 6px 16px; font-size: 11px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    border: 1px solid var(--navy); color: var(--navy);
+  }
+  .founder-quote {
+    margin-top: 40px; padding: 32px;
+    border-left: 3px solid var(--red); background: var(--white);
+  }
+  .founder-quote p {
+    font-size: 15px; font-weight: 400; font-style: italic;
+    color: var(--navy); line-height: 1.7;
+  }
+  .founder-quote cite {
+    display: block; margin-top: 12px;
+    font-size: 12px; font-style: normal; font-weight: 600;
+    color: var(--gray); letter-spacing: 1px; text-transform: uppercase;
+  }
+  .career-timeline { margin-top: 40px; }
+  .career-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid #e2e6ea;
+  }
+  .career-item:last-child { border-bottom: none; }
+  .career-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--red); margin-top: 6px; flex-shrink: 0;
+  }
+  .career-role { font-size: 14px; font-weight: 600; color: var(--navy); }
+  .career-org { font-size: 13px; color: var(--text); margin-top: 2px; }
+
+  /* APPROACH */
+  .approach { background: var(--white); }
+  .approach-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 32px; margin-top: 64px;
+  }
+  .step-number {
+    font-size: 48px; font-weight: 700; color: var(--red);
+    opacity: 0.3; line-height: 1; margin-bottom: 16px;
+  }
+  .step-title { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 10px; }
+  .step-desc { font-size: 13px; line-height: 1.7; color: var(--text); }
+
+  /* CONTACT */
+  .contact { background: var(--light); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .contact-form input, .contact-form select, .contact-form textarea {
+    font-family: 'Montserrat', sans-serif; font-size: 14px; padding: 14px 18px;
+    border: 1px solid #d1d5db; background: var(--white);
+    color: var(--navy); outline: none; transition: border-color 0.3s;
+    -webkit-appearance: none;
+  }
+  .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--navy); }
+  .contact-form textarea { resize: vertical; min-height: 120px; }
+  .contact-form select { color: var(--gray); }
+  .contact-form button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; padding: 16px 40px;
+    background: var(--navy); color: var(--white);
+    border: none; cursor: pointer; transition: background 0.3s;
+    align-self: flex-start;
+  }
+  .contact-form button:hover { background: var(--red); }
+  .contact-info h3 {
+    font-size: 13px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--navy); margin-bottom: 8px;
+  }
+  .contact-info p { font-size: 15px; color: var(--text); line-height: 1.7; margin-bottom: 32px; }
+  .contact-info a { color: var(--navy); text-decoration: none; }
+  .contact-info a:hover { color: var(--red); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); padding: 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-weight: 600; font-size: 12px; letter-spacing: 3px;
+    color: var(--white); text-transform: uppercase;
+  }
+  .footer-logo span { color: var(--red); }
+  .footer-right { text-align: right; }
+  .footer-copy { font-size: 11px; color: var(--gray); letter-spacing: 1px; }
+  .footer-link {
+    display: block; margin-top: 8px; font-size: 11px;
+    color: var(--gray); letter-spacing: 1px; text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-link:hover { color: var(--white); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .mission-grid, .founder-grid, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .expertise-grid, .impact-grid { grid-template-columns: 1fr; }
+    .approach-steps { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+    .footer-right { text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .approach-steps { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">SAVIN HILL<span> &middot;</span></a>
+  <div class="nav-links">
+    <a href="#about">Who We Are</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#impact">Impact</a>
+    <a href="#founder">Our Founder</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO — Firm leads -->
+<section class="hero">
+  <div class="hero-logo">
+    <div class="mark">SAVIN HILL</div>
+    <div class="rule"></div>
+    <div class="sub">CONSULTING</div>
+  </div>
+  <p class="hero-tagline">Strengthening health and human services<br>from practice to policy.</p>
+  <p class="hero-sub">We partner with HHS agencies at every level of government to improve practice outcomes, build leadership capacity, and create sustainable change for the communities they serve.</p>
+  <a href="#contact" class="hero-cta">Start a Conversation</a>
+  <div class="scroll-indicator"></div>
+</section>
+
+<!-- WHO WE ARE — Firm identity -->
+<section class="mission" id="about">
+  <div class="section-inner mission-grid">
+    <div>
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-heading">Practice-first consulting for agencies that serve people.</h2>
+      <p class="section-body">
+        Savin Hill Consulting was founded on a simple principle: technology and process should serve practice — not the other way around. We work with health and human services professionals at the national, state, and local levels to improve the way agencies deliver services, lead teams, and manage change.
+      </p>
+      <p class="section-body" style="margin-top: 16px;">
+        We don't hand off reports and walk away. We get in the work with your team — assessing what's real, building what's needed, and staying until it sticks.
+      </p>
+    </div>
+    <div>
+      <div class="mission-pillars">
+        <div class="pillar">
+          <div class="pillar-marker"></div>
+          <div>
+            <h4>Practice Over Technology</h4>
+            <p>We understand frontline work and design solutions around how people actually do their jobs — so they spend time with people, not struggling with systems.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-marker"></div>
+          <div>
+            <h4>Collaboration Is Non-Negotiable</h4>
+            <p>Working together isn't a nice-to-have. It's the critical skill that makes programs grow and outcomes improve. We build it into everything we do.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-marker"></div>
+          <div>
+            <h4>Sustainable Solutions</h4>
+            <p>We build internal capacity — not dependency. Our goal is to leave your agency stronger, more capable, and more resilient than we found it.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-marker"></div>
+          <div>
+            <h4>People at the Center</h4>
+            <p>Behind every system, policy, and process are the people being served. We never lose sight of who the work is ultimately for.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE — Firm capabilities -->
+<section class="expertise" id="expertise">
+  <div class="section-inner">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-heading">Deep HHS expertise, applied where it matters.</h2>
+    <p class="section-body">Our consulting practice spans the full breadth of health and human services — from frontline practice improvement to enterprise-level strategic planning.</p>
+    <div class="expertise-grid">
+      <div class="expertise-card">
+        <div class="card-accent"></div>
+        <h3>Practice &amp; Policy Consulting</h3>
+        <p>Needs assessments, practice improvement strategies, and policy analysis for state and local HHS agencies. Translating complex regulations into practical, frontline-ready guidance.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="card-accent"></div>
+        <h3>Change Management</h3>
+        <p>CCMP-certified change management for organizations navigating system transitions, technology rollouts, and restructuring. We make change stick — not just happen.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="card-accent"></div>
+        <h3>Child Welfare &amp; Family Services</h3>
+        <p>CCWIS feasibility studies, CFSR preparation, continuous quality improvement, and Systems of Care implementation. Deep expertise across every level of child welfare practice.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="card-accent"></div>
+        <h3>Strategic Planning</h3>
+        <p>Organizational strategic plans, Human Services Value Curve implementation, and infrastructure development for HHS departments ready to move from reactive to proactive.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="card-accent"></div>
+        <h3>Continuous Improvement</h3>
+        <p>Lean Six Sigma-informed process improvement for HHS agencies. Streamlining business processes so teams focus on serving people, not fighting paperwork.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="card-accent"></div>
+        <h3>Leadership &amp; Capacity Building</h3>
+        <p>Developing the skills of HHS leaders to navigate complexity, manage through change, and build high-performing teams — grounded in real-world experience, not theory.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT AREAS -->
+<section class="impact" id="impact">
+  <div class="section-inner">
+    <div class="section-label">Where We Work</div>
+    <h2 class="section-heading">Proven impact across the HHS landscape.</h2>
+    <p class="section-body">We've led and contributed to initiatives spanning the full spectrum of health and human services — always with a focus on measurable, sustainable outcomes.</p>
+    <div class="impact-grid">
+      <div class="impact-item">
+        <h3>Child Welfare Systems</h3>
+        <p>CCWIS business process assessments, feasibility studies, and practice improvement across multiple states. QSR, CFSR, and CQI review leadership.</p>
+      </div>
+      <div class="impact-item">
+        <h3>Behavioral Health</h3>
+        <p>Children's crisis referral and mobile crisis response outcome improvement. Integrating behavioral health strategies across child welfare and family services systems.</p>
+      </div>
+      <div class="impact-item">
+        <h3>Aging &amp; Independent Living</h3>
+        <p>Needs assessments and state plan development for agencies serving older adults and individuals with developmental disabilities.</p>
+      </div>
+      <div class="impact-item">
+        <h3>Community &amp; Home-Based Services</h3>
+        <p>Training and support needs assessments for home-based community services and developmental disabilities divisions. Strengthening the direct care workforce.</p>
+      </div>
+      <div class="impact-item">
+        <h3>Refugee &amp; Immigrant Services</h3>
+        <p>Program needs assessments ensuring new communities receive the support, resources, and integration services they need to thrive.</p>
+      </div>
+      <div class="impact-item">
+        <h3>Systems of Care</h3>
+        <p>Multi-year implementation across counties statewide. Cross-system collaboration spanning child welfare, mental health, juvenile probation, and education.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER — Andrea's story -->
+<section class="founder" id="founder">
+  <div class="section-inner founder-grid">
+    <div>
+      <div class="section-label">Our Founder</div>
+      <h2 class="section-heading">Andrea Richardson, CCMP, LSSGB</h2>
+      <p class="section-body">
+        Andrea founded Savin Hill Consulting after more than 30 years working in health and human services — not from the sidelines, but in the work itself. From front-line child welfare practice to managing multi-million dollar federal initiatives, she built a career around one belief: <strong>put practice first, and the right solutions follow.</strong>
+      </p>
+      <p class="section-body" style="margin-top: 16px;">
+        She's worked at every level — county, state, and federal — and understands the roadblocks HHS professionals face because she's lived them. That firsthand knowledge is what makes Savin Hill different. Every solution we build starts with the people doing the work and the people being served.
+      </p>
+      <div class="founder-credentials">
+        <span class="credential-tag">CCMP</span>
+        <span class="credential-tag">Lean Six Sigma Green Belt</span>
+        <span class="credential-tag">B.S. Family Studies — UConn</span>
+      </div>
+    </div>
+    <div>
+      <div class="career-timeline">
+        <div class="career-item">
+          <div class="career-dot"></div>
+          <div>
+            <div class="career-role">Founder &amp; Principal Consultant</div>
+            <div class="career-org">Savin Hill Consulting</div>
+          </div>
+        </div>
+        <div class="career-item">
+          <div class="career-dot" style="opacity:0.7"></div>
+          <div>
+            <div class="career-role">Manager &amp; HHS Practice Lead</div>
+            <div class="career-org">BerryDunn</div>
+          </div>
+        </div>
+        <div class="career-item">
+          <div class="career-dot" style="opacity:0.6"></div>
+          <div>
+            <div class="career-role">Human Services Subject Matter Expert</div>
+            <div class="career-org">Info-Matrix Corporation</div>
+          </div>
+        </div>
+        <div class="career-item">
+          <div class="career-dot" style="opacity:0.5"></div>
+          <div>
+            <div class="career-role">Founder &amp; Podcast Host</div>
+            <div class="career-org">ICPromise — The Smart Non-Profiter</div>
+          </div>
+        </div>
+        <div class="career-item">
+          <div class="career-dot" style="opacity:0.4"></div>
+          <div>
+            <div class="career-role">Practice Improvement Specialist</div>
+            <div class="career-org">Univ. of Pittsburgh — PA Child Welfare Resource Center</div>
+          </div>
+        </div>
+        <div class="career-item">
+          <div class="career-dot" style="opacity:0.3"></div>
+          <div>
+            <div class="career-role">Project Manager — OCYF</div>
+            <div class="career-org">PA Department of Public Welfare</div>
+          </div>
+        </div>
+      </div>
+      <div class="founder-quote">
+        <p>"Building solutions to systemic problems and understanding first-hand the struggles HHS professionals face are the drivers for my work. Creating sustainable solutions that turn the focus back to the people who need us — that's what drives everything I do."</p>
+        <cite>Andrea Richardson</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="section-inner">
+    <div class="section-label">Our Approach</div>
+    <h2 class="section-heading">No templates. No theory. Just the work.</h2>
+    <p class="section-body">Every engagement starts with listening. We learn your agency, your people, and your challenges before we build anything — and we stay in the work until it's producing results.</p>
+    <div class="approach-steps">
+      <div>
+        <div class="step-number">01</div>
+        <div class="step-title">Listen &amp; Assess</div>
+        <div class="step-desc">Deep-dive needs assessments at the community, agency, and practice level. Understanding the real challenges before prescribing solutions.</div>
+      </div>
+      <div>
+        <div class="step-number">02</div>
+        <div class="step-title">Design</div>
+        <div class="step-desc">Strategies grounded in evidence, practice expertise, and the lived experience of frontline teams. Sustainable solutions, not quick fixes.</div>
+      </div>
+      <div>
+        <div class="step-number">03</div>
+        <div class="step-title">Implement</div>
+        <div class="step-desc">Hands-on change management and project leadership. In the work with your team — not handing off a report and walking away.</div>
+      </div>
+      <div>
+        <div class="step-number">04</div>
+        <div class="step-title">Sustain</div>
+        <div class="step-desc">Build internal capacity so improvements last. Leadership coaching, CQI frameworks, and knowledge transfer that keeps momentum going.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner contact-grid">
+    <div>
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-heading">Let's develop solutions together.</h2>
+      <p class="section-body" style="margin-bottom: 32px;">Whether you're navigating a system transition, planning a needs assessment, or building your team's capacity — we'd love to hear about the work you're doing.</p>
+      <div class="contact-form">
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
+        <input type="text" placeholder="Organization">
+        <select>
+          <option value="" disabled selected>Area of interest</option>
+          <option>Practice & Policy Consulting</option>
+          <option>Change Management</option>
+          <option>Child Welfare & Family Services</option>
+          <option>Strategic Planning</option>
+          <option>Continuous Improvement</option>
+          <option>Leadership & Capacity Building</option>
+          <option>Other</option>
+        </select>
+        <textarea placeholder="Tell us about your challenge..."></textarea>
+        <button type="submit">Send Message</button>
+      </div>
+    </div>
+    <div class="contact-info" style="margin-top: 56px;">
+      <h3>Email</h3>
+      <p><a href="mailto:Andrea@SavinHillConsulting.com">Andrea@SavinHillConsulting.com</a></p>
+      <h3>Phone</h3>
+      <p><a href="tel:7176065097">717-606-5097</a></p>
+      <h3>Based In</h3>
+      <p>Central Pennsylvania<br>Serving agencies nationwide</p>
+      <h3>Connect</h3>
+      <p><a href="https://www.linkedin.com/in/anrichardson" target="_blank" rel="noopener">LinkedIn &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">SAVIN HILL <span>&middot;</span> CONSULTING</div>
+  <div class="footer-right">
+    <div class="footer-copy">&copy; 2026 Savin Hill Consulting. All rights reserved.</div>
+    <a href="https://www.linkedin.com/in/anrichardson" target="_blank" rel="noopener" class="footer-link">LinkedIn &rarr;</a>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.section-label, .section-heading, .section-body, .expertise-card, .impact-item, .pillar, .step-number, .founder-quote, .career-item, .credential-tag').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.7s ease-out, transform 0.7s ease-out';
+    observer.observe(el);
+  });
+
+  document.querySelectorAll('.expertise-card').forEach((c, i) => { c.style.transitionDelay = `${i * 0.1}s`; });
+  document.querySelectorAll('.impact-item').forEach((c, i) => { c.style.transitionDelay = `${i * 0.1}s`; });
+  document.querySelectorAll('.pillar').forEach((c, i) => { c.style.transitionDelay = `${i * 0.12}s`; });
+  document.querySelectorAll('.career-item').forEach((c, i) => { c.style.transitionDelay = `${i * 0.1}s`; });
+  document.querySelectorAll('.credential-tag').forEach((c, i) => { c.style.transitionDelay = `${i * 0.1}s`; });
+  document.querySelectorAll('.approach-steps > div').forEach((s, i) => {
+    s.querySelector('.step-number').style.transitionDelay = `${i * 0.15}s`;
+  });
+</script>
+
+</body>
+</html>
